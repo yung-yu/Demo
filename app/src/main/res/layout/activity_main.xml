@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/biometricButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openBiometric"
+        android:text="Biometric" />
+    <Button
+        android:id="@+id/qrCodeVisionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openQrCodeVision"
+        android:text="QrCode Vision" />
+    <Button
+        android:id="@+id/textVisionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openTextVision"
+        android:text="text Vision" />
+</LinearLayout>
