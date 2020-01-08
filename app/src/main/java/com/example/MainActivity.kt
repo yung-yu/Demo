@@ -8,6 +8,7 @@ import android.view.View
 import com.example.biometric.BiometricDemoActivity
 import com.example.vision.QrCodeVisionDemoActivity
 import com.example.vision.TextVisionDemoActivity
+import com.example.vision.ZxingQrCodeVisionDemoActivity
 
 class MainActivity : Activity() {
     companion object {
@@ -30,5 +31,9 @@ class MainActivity : Activity() {
 
     fun openTextVision(view:View){
         startActivity(Intent(this, TextVisionDemoActivity::class.java))
+    }
+
+    fun openQrCodeZxing(view:View){
+        startActivity(Intent(this, ZxingQrCodeVisionDemoActivity::class.java))
     }
 }

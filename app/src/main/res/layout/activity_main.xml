@@ -21,4 +21,11 @@
         android:layout_height="wrap_content"
         android:onClick="openTextVision"
         android:text="text Vision" />
+
+    <Button
+        android:id="@+id/qrCodeZxingButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openQrCodeZxing"
+        android:text="QrCode Zxing" />
 </LinearLayout>

@@ -26,6 +26,7 @@
         <activity android:name=".vision.QrCodeVisionDemoActivity" />
         <activity android:name=".biometric.BiometricDemoActivity" />
         <activity android:name=".vision.TextVisionDemoActivity" />
+        <activity android:name=".vision.ZxingQrCodeVisionDemoActivity" />
     </application>
 
 </manifest>
