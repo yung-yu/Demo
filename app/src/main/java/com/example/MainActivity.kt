@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.example.biometric.BiometricDemoActivity
+import com.example.book.BookExampleActivity
 import com.example.vision.QrCodeVisionDemoActivity
 import com.example.vision.TextVisionDemoActivity
 import com.example.vision.ZxingQrCodeVisionDemoActivity
@@ -35,5 +36,8 @@ class MainActivity : Activity() {
 
     fun openQrCodeZxing(view:View){
         startActivity(Intent(this, ZxingQrCodeVisionDemoActivity::class.java))
+    }
+    fun openBook(view:View){
+        startActivity(Intent(this, BookExampleActivity::class.java))
     }
 }
