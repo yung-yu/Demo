@@ -1,10 +1,12 @@
 package com.example.book
 
 import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
+import androidx.core.view.doOnPreDraw
 import com.example.R
 import com.example.book.view.TurnBook
 import kotlinx.android.synthetic.main.activtiy_book.*
@@ -12,26 +14,33 @@ import kotlinx.android.synthetic.main.activtiy_book.*
 class BookExampleActivity : Activity() {
     companion object {
         const val TAG = "BookExampleActivity"
+        const val PREFERENCE_BOOK_MARK = "BOOK_MARK"
     }
     private var bookView:TurnBook? = null
-
+    private val bookPreference:SharedPreferences by lazy {
+        getSharedPreferences("book", Context.MODE_PRIVATE)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "onCreate")
         setContentView(R.layout.activtiy_book)
-        container?.viewTreeObserver?.addOnGlobalLayoutListener(
-            object:ViewTreeObserver.OnGlobalLayoutListener{
-                override fun onGlobalLayout() {
-                    bookView = TurnBook(container?.context!!, container?.width?:0, container?.height?:0, 16, 16)
-                    container?.addView(bookView,
-                        ViewGroup.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
-                    bookView?.setBookFile("book.txt", true)
-                    bookView?.NextPage(false)
-                    container?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
-                }
-            }
-        )
+        container?.doOnPreDraw {
+            bookView = TurnBook(
+                container?.context!!,
+                container?.width ?: 0,
+                container?.height ?: 0,
+                16,
+                16
+            )
+            container?.addView(
+                bookView,
+                ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            )
+            bookView?.setBookFile("book.txt", true)
+            bookView?.ToBookMarkPage(bookPreference.getInt(PREFERENCE_BOOK_MARK, 0))
+        }
     }
 
     override fun onStart() {
@@ -61,5 +70,10 @@ class BookExampleActivity : Activity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.i(TAG, "onDestroy")
+        bookPreference.edit()
+            .putInt(PREFERENCE_BOOK_MARK,
+                bookView?.bookPageFactory?.m_mbBufBegin?:0)
+            .apply()
+        bookView?.recycle()
     }
 }

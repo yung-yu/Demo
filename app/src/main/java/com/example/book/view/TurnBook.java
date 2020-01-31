@@ -32,7 +32,6 @@ public class TurnBook extends PageWidget implements View.OnTouchListener {
 
     public TurnBook(Context context, int width, int height, int maginW, int maginh) {
         super(context);
-        // TODO Auto-generated constructor stub
         parent = context;
 
         setInit(width, height, maginW, maginh);
@@ -249,7 +248,6 @@ public class TurnBook extends PageWidget implements View.OnTouchListener {
         mCurPageCanvas = null;
         mNextPageCanvas = null;
         pagefactory = null;
-        System.gc();
     }
 
     @Override
