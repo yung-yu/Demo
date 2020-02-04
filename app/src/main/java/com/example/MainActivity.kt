@@ -10,6 +10,8 @@ import com.example.book.BookExampleActivity
 import com.example.vision.QrCodeVisionDemoActivity
 import com.example.vision.TextVisionDemoActivity
 import com.example.vision.ZxingQrCodeVisionDemoActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : Activity() {
     companion object {
@@ -20,6 +22,10 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "onCreate")
         setContentView(R.layout.activity_main)
+        val behavior = BottomSheetBehavior.from(bottomSheet)
+        behavior.peekHeight = 100
+        behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        behavior.isFitToContents = false
     }
 
     fun openBiometric(view: View){

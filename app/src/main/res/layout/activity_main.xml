@@ -1,37 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize" />
+    </androidx.core.widget.NestedScrollView>
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.example.book.CustomBehavior">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="hello World"/>
+    </FrameLayout>
 
-    <Button
-        android:id="@+id/biometricButton"
+    <LinearLayout
+        android:id="@+id/bottomSheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="openBiometric"
-        android:text="Biometric" />
-    <Button
-        android:id="@+id/qrCodeVisionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="openQrCodeVision"
-        android:text="QrCode Vision" />
-    <Button
-        android:id="@+id/textVisionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="openTextVision"
-        android:text="text Vision" />
+        android:orientation="vertical"
+        android:background="#00B0FF"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <Button
-        android:id="@+id/qrCodeZxingButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="openQrCodeZxing"
-        android:text="QrCode Zxing" />
+        <Button
+            android:id="@+id/biometricButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="openBiometric"
+            android:text="Biometric" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="openBook"
-        android:text="book"/>
-</LinearLayout>
+        <Button
+            android:id="@+id/qrCodeVisionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="openQrCodeVision"
+            android:text="QrCode Vision" />
+
+        <Button
+            android:id="@+id/textVisionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="openTextVision"
+            android:text="text Vision" />
+
+        <Button
+            android:id="@+id/qrCodeZxingButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="openQrCodeZxing"
+            android:text="QrCode Zxing" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="openBook"
+            android:text="book" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
