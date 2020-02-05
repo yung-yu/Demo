@@ -1,10 +1,16 @@
 package com.example
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.biometric.BiometricDemoActivity
 import com.example.book.BookExampleActivity
 import com.example.vision.QrCodeVisionDemoActivity
@@ -26,6 +32,12 @@ class MainActivity : Activity() {
         behavior.peekHeight = 100
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
         behavior.isFitToContents = false
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val data = ArrayList<String>()
+        for (i in 0..100){
+            data.add("item$i")
+        }
+        recyclerView.adapter = StringAdapter(this, data)
     }
 
     fun openBiometric(view: View){
@@ -45,5 +57,26 @@ class MainActivity : Activity() {
     }
     fun openBook(view:View){
         startActivity(Intent(this, BookExampleActivity::class.java))
+    }
+
+    class StringAdapter(val context: Context, var data:ArrayList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        class ItemViewHolder(var view:View):RecyclerView.ViewHolder(view){
+
+        }
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+           return ItemViewHolder(LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false))
+        }
+
+        override fun getItemCount(): Int {
+           return data.size
+        }
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            if(holder is ItemViewHolder){
+                val textView = holder.itemView as TextView
+                textView.text = data[position]
+            }
+        }
+
     }
 }

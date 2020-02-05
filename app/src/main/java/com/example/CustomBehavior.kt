@@ -1,4 +1,4 @@
-package com.example.book
+package com.example
 
 import android.content.Context
 import android.util.AttributeSet
