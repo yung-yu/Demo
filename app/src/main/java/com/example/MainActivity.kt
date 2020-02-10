@@ -6,11 +6,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.di.component.Student
 import com.example.biometric.BiometricDemoActivity
 import com.example.book.BookExampleActivity
 import com.example.vision.QrCodeVisionDemoActivity
@@ -19,11 +21,13 @@ import com.example.vision.ZxingQrCodeVisionDemoActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
 
+
+
 class MainActivity : Activity() {
     companion object {
-        const val TAG = "MainActivity"
+        private const val TAG = "MainActivity"
     }
-
+    private  lateinit var behavior:BottomSheetBehavior<View>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "onCreate")
@@ -32,16 +36,21 @@ class MainActivity : Activity() {
         behavior.peekHeight = 100
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
         behavior.isFitToContents = false
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
+
         val data = ArrayList<String>()
         for (i in 0..100){
             data.add("item$i")
         }
         recyclerView.adapter = StringAdapter(this, data)
+        val student = Student()
+        Log.d(TAG, "student scroe ${student.test.score}")
     }
 
     fun openBiometric(view: View){
         startActivity(Intent(this, BiometricDemoActivity::class.java))
+
     }
 
     fun openQrCodeVision(view: View){

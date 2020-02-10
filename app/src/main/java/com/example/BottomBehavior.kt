@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 
-class CustomBehavior:CoordinatorLayout.Behavior<View> {
+class BottomBehavior:CoordinatorLayout.Behavior<View> {
     constructor() : super()
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
 
@@ -23,10 +23,20 @@ class CustomBehavior:CoordinatorLayout.Behavior<View> {
         child: View,
         dependency: View
     ): Boolean {
-        val helfHeight = parent.height / 2
-        val scroll = parent.height - dependency.y
-        if(scroll <= helfHeight){
-            child.translationY = -scroll
+        val h = parent.height
+        val y = dependency.y
+        val dh = dependency.height
+        val th = h - (y+dh) + 1
+        if(th < 0){
+            child.y = parent.height.toFloat()
+            val lp:CoordinatorLayout.LayoutParams = child.layoutParams as CoordinatorLayout.LayoutParams
+            lp.height = 0
+            child.layoutParams = lp
+        } else {
+            child.y = y + dh
+            val lp:CoordinatorLayout.LayoutParams = child.layoutParams as CoordinatorLayout.LayoutParams
+            lp.height = th.toInt()
+            child.layoutParams = lp
         }
         return true
     }

@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
     <FrameLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.example.CustomBehavior">
+        android:background="#FF1744"
+        app:layout_behavior="com.example.ToBehavior"
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,8 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#00B0FF"
+        android:background="#aa00B0FF"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/biometricButton"
@@ -31,36 +37,52 @@
             android:onClick="openBiometric"
             android:text="Biometric" />
 
-        <Button
-            android:id="@+id/qrCodeVisionButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="openQrCodeVision"
-            android:text="QrCode Vision" />
+<!--        <Button-->
+<!--            android:id="@+id/qrCodeVisionButton"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:onClick="openQrCodeVision"-->
+<!--            android:text="QrCode Vision" />-->
 
-        <Button
-            android:id="@+id/textVisionButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="openTextVision"
-            android:text="text Vision" />
+<!--        <Button-->
+<!--            android:id="@+id/textVisionButton"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:onClick="openTextVision"-->
+<!--            android:text="text Vision" />-->
 
-        <Button
-            android:id="@+id/qrCodeZxingButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="openQrCodeZxing"
-            android:text="QrCode Zxing" />
+<!--        <Button-->
+<!--            android:id="@+id/qrCodeZxingButton"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:onClick="openQrCodeZxing"-->
+<!--            android:text="QrCode Zxing" />-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="openBook"
-            android:text="book" />
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:onClick="openBook"-->
+<!--            android:text="book" />-->
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+    <RelativeLayout
+        app:layout_behavior="com.example.BottomBehavior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/bottom"
+            />
+            <Button
+                android:id="@+id/bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="@string/app_name"/>
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
