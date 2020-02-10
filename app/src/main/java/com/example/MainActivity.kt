@@ -20,7 +20,8 @@ import com.example.vision.TextVisionDemoActivity
 import com.example.vision.ZxingQrCodeVisionDemoActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
-
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : Activity() {
@@ -36,6 +37,21 @@ class MainActivity : Activity() {
         behavior.peekHeight = 100
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
         behavior.isFitToContents = false
+        behavior.setBottomSheetCallback(object:BottomSheetBehavior.BottomSheetCallback(){
+            override fun onSlide(p0: View, p1: Float) {
+                if(behavior.state == BottomSheetBehavior.STATE_SETTLING) {
+                    if (p1 < 0.7 && p1 > 0.3) {
+                        behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+                    }
+                }
+            }
+
+            override fun onStateChanged(p0: View, p1: Int) {
+            
+            }
+
+        })
+
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
@@ -46,6 +62,7 @@ class MainActivity : Activity() {
         recyclerView.adapter = StringAdapter(this, data)
         val student = Student()
         Log.d(TAG, "student scroe ${student.test.score}")
+
     }
 
     fun openBiometric(view: View){
