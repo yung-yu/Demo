@@ -14,9 +14,12 @@
         android:elevation="2dp"
         app:layout_behavior="com.example.ToolbarBehavior">
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             app:title="toolbar"
+            app:navigationIcon="@android:drawable/ic_menu_add"
             />
     </LinearLayout>
 

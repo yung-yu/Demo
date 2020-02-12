@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.ArrayList
 
 
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "MainActivity"
     }
@@ -33,7 +34,10 @@ class MainActivity : Activity() {
         Log.i(TAG, "onCreate")
         setContentView(R.layout.activity_main)
         window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent)
-        val behavior = BottomSheetBehavior.from(bottomSheet)
+        toolbar?.setNavigationOnClickListener {
+            behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        }
+        behavior = BottomSheetBehavior.from(bottomSheet)
         behavior.peekHeight = 100
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
         behavior.isFitToContents = false
@@ -63,6 +67,16 @@ class MainActivity : Activity() {
         val student = Student()
         Log.d(TAG, "student scroe ${student.test.score}")
 
+
+    }
+
+    override fun onBackPressed() {
+        if(behavior.state == BottomSheetBehavior.STATE_EXPANDED){
+            behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            return
+        } else {
+            super.onBackPressed()
+        }
 
     }
 
