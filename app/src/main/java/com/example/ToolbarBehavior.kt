@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 
-class ToBehavior:CoordinatorLayout.Behavior<View> {
+class ToolbarBehavior: CoordinatorLayout.Behavior<View> {
     constructor() : super()
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
 
@@ -25,20 +25,15 @@ class ToBehavior:CoordinatorLayout.Behavior<View> {
     ): Boolean {
         val h = parent.height
         val y = dependency.y
-        if(y >= h/2) {
-            child.y = parent.y
-            val lp: CoordinatorLayout.LayoutParams =
-                child.layoutParams as CoordinatorLayout.LayoutParams
-            lp.height = y.toInt()
-            child.layoutParams = lp
+        child.y = 0f
+        if(y > child.height){
+            dependency.setPadding(0, 0, 0, 0)
+            child.alpha = 0f
         } else {
-            child.y = parent.y
-            val lp: CoordinatorLayout.LayoutParams =
-                child.layoutParams as CoordinatorLayout.LayoutParams
-            if(lp.height != h/2) {
-                lp.height = h / 2
-                child.layoutParams = lp
-            }
+            val alpha:Float = ((child.height - y)/child.height) * 1f
+            val paddingTop:Int = (child.height - y).toInt()
+            child.alpha = alpha
+            dependency.setPadding(0, paddingTop, 0, 0)
         }
         return true
     }

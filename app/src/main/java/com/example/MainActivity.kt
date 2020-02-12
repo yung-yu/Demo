@@ -6,10 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.di.component.Student
@@ -20,7 +20,6 @@ import com.example.vision.TextVisionDemoActivity
 import com.example.vision.ZxingQrCodeVisionDemoActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -33,6 +32,7 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "onCreate")
         setContentView(R.layout.activity_main)
+        window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent)
         val behavior = BottomSheetBehavior.from(bottomSheet)
         behavior.peekHeight = 100
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -47,7 +47,7 @@ class MainActivity : Activity() {
             }
 
             override fun onStateChanged(p0: View, p1: Int) {
-            
+
             }
 
         })
@@ -62,6 +62,7 @@ class MainActivity : Activity() {
         recyclerView.adapter = StringAdapter(this, data)
         val student = Student()
         Log.d(TAG, "student scroe ${student.test.score}")
+
 
     }
 
