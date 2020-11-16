@@ -66,8 +66,12 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = StringAdapter(this, data)
         val student = Student()
         Log.d(TAG, "student scroe ${student.test.score}")
+        flakeView?.start()
+    }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        flakeView?.stop()
     }
 
     override fun onBackPressed() {

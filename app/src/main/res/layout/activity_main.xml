@@ -112,5 +112,8 @@
             android:layout_alignParentBottom="true"
             android:text="@string/app_name" />
     </RelativeLayout>
-
+    <com.example.fall.FlakeView
+        android:id="@+id/flakeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
